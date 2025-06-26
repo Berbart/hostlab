@@ -17,17 +17,17 @@ Dieses Repository dient als Testumgebung für:
 ## 🔧 Projektmodule & Aufgaben
 
 ### 🌐 Statische Webinhalte
-- [ ] Landing Page mit HTML/CSS (Tailwind oder Bootstrap)
-- [ ] Dark-/Light-Mode Toggle via JavaScript
-- [ ] Dynamische Gallerie aus einem Verzeichnis (`/public/images`)
-- [ ] Markdown-Artikel als statische Seiten (`/content/*.md`)
+- [x] Landing Page mit HTML/CSS (Tailwind oder Bootstrap)
+- [x] Dark-/Light-Mode Toggle via JavaScript
+- [x] Dynamische Gallerie aus einem Verzeichnis (`/public/images`)
+- [x] Markdown-Artikel als statische Seiten (`/content/*.md`)
 - [ ] Kontaktformular (Frontend, optional Backend-Anbindung)
 - [ ] Lokale Sprachumschaltung (Deutsch/Englisch)
 
 ### ⚙️ Backend-Entwicklung
 - [x] REST-API mit einfachen Endpunkten (`/api/ping`, `/api/info`)
 - [ ] File Upload + File Serving über die API
-- [ ] Einfacher JSON-Datenspeicher (Dateibasiert)
+ - [x] Einfacher JSON-Datenspeicher (Dateibasiert)
 - [ ] Dummy-Login mit Session (Cookie oder Token-basiert)
 - [x] Serverseitiger Markdown-Renderer
 
@@ -45,13 +45,13 @@ Dieses Repository dient als Testumgebung für:
 - [ ] API für „Fun Facts“ oder Zitate bauen
 
 ### 🐳 Docker & DevOps
-- [ ] Dockerfile für statischen Server (Nginx)
-- [ ] Dockerfile für API mit `docker-compose.yml`
-- [ ] `.devcontainer` für VS Code Remote Development
+- [x] Dockerfile für statischen Server (Nginx)
+- [x] Dockerfile für API mit `docker-compose.yml`
+- [x] `.devcontainer` für VS Code Remote Development
 - [ ] `Makefile` oder `Taskfile.yml` für lokale Automatisierung
 
 ### 🔐 Sicherheit & Access Control
-- [ ] Zugriffsbeschränkung für API-Endpunkte
+- [x] Zugriffsbeschränkung für API-Endpunkte
 - [ ] Upload-Security: Dateitypprüfung, Limitierung
 - [ ] Custom Error Pages (z. B. 404, 403)
 
@@ -68,6 +68,15 @@ pip install -r requirements.txt
 # oder: docker compose up --build
 ```
 
+### Docker Compose
+
+Statt der lokalen Installation kann die Anwendung über Docker Compose gestartet werden:
+
+```bash
+docker compose up --build
+```
+Frontend steht dann auf <http://localhost:8080>, die API auf <http://localhost:5000> bereit.
+
 ### API starten
 
 Nach der Installation der Abhängigkeiten kann die kleine Beispiel‑API
@@ -77,11 +86,16 @@ lokal mit folgendem Kommando gestartet werden:
 python api/app.py
 ```
 
+Die statische Seite erreichst du unter `http://localhost:5000/`.
 Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
 
 ### Neue Endpunkte
 
-- `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück
+- `GET /api/images` – listet Dateien aus `/public/images`
+- Der Ordner ist im Repository leer; füge eigene Bilder unter `public/images` hinzu.
+- `GET /articles/<name>` – rendert Markdown-Dateien aus `/content`
+- `POST /api/login` – gibt bei korrekter Anmeldung ein Token zurück (`{"username": "admin", "password": "secret"}`)
+- `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück (Token benötigt)
 
 ## 🖥️ Lokale Nutzung
 
