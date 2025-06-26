@@ -19,6 +19,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_FOLDER = BASE_DIR / "uploads"
 UPLOAD_FOLDER.mkdir(exist_ok=True)
 
+import json
+
+STATE_FILE = os.path.join(os.path.dirname(__file__), 'chess_state.json')
+
+DEFAULT_BOARD = [
+    ["r","n","b","q","k","b","n","r"],
+    ["p","p","p","p","p","p","p","p"],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["P","P","P","P","P","P","P","P"],
+    ["R","N","B","Q","K","B","N","R"]
+]
+
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = str(UPLOAD_FOLDER)
 app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024  # 1MB
@@ -69,6 +84,30 @@ def render_markdown():
         return jsonify({'error': 'no text provided'}), 400
     html = markdown.markdown(text)
     return jsonify({'html': html})
+
+def load_state():
+    if not os.path.exists(STATE_FILE):
+        return {'board': DEFAULT_BOARD, 'turn': 'white'}
+    with open(STATE_FILE, 'r') as f:
+        return json.load(f)
+
+
+def save_state(state):
+    with open(STATE_FILE, 'w') as f:
+        json.dump(state, f)
+
+
+@app.route('/api/chess', methods=['GET', 'POST'])
+def chess_state():
+    if request.method == 'GET':
+        return jsonify(load_state())
+    data = request.get_json() or {}
+    board = data.get('board')
+    turn = data.get('turn')
+    if board is None or turn not in ('white', 'black'):
+        return jsonify({'error': 'invalid state'}), 400
+    save_state({'board': board, 'turn': turn})
+    return jsonify({'status': 'saved'})
 
 @app.route('/api/images')
 def list_images():
