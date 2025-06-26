@@ -27,7 +27,7 @@ Dieses Repository dient als Testumgebung für:
 ### ⚙️ Backend-Entwicklung
 - [x] REST-API mit einfachen Endpunkten (`/api/ping`, `/api/info`)
 - [ ] File Upload + File Serving über die API
-- [ ] Einfacher JSON-Datenspeicher (Dateibasiert)
+ - [x] Einfacher JSON-Datenspeicher (Dateibasiert)
 - [ ] Dummy-Login mit Session (Cookie oder Token-basiert)
 - [x] Serverseitiger Markdown-Renderer
 
