@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" class="light">
 <head>
-    <meta charset="UTF-8">
-    <title>Codex Playground</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex Playground</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Welcome to Codex Playground</h1>
-    <p>Static content test page.</p>
+<body class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+<header class="p-4 flex justify-between items-center shadow">
+<h1 class="text-xl font-bold">Codex Playground</h1>
+<button id="toggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">Toggle Dark Mode</button>
+</header>
+<main class="flex-grow p-4" id="content">
+<section id="gallery" class="grid grid-cols-2 gap-4"></section>
+</main>
+<footer class="p-4 text-center text-sm bg-gray-100 dark:bg-gray-900">&copy; 2024 Codex</footer>
+<script src="script.js"></script>
 </body>
 </html>

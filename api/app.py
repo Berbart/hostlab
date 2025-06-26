@@ -1,9 +1,16 @@
+from flask import Flask, jsonify, request, send_from_directory, abort
+import markdown
 import os
+
+app = Flask(__name__, static_folder='../public', static_url_path='')
+
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
+
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.utils import secure_filename
-import markdown
 import secrets
 from functools import wraps
 from data import store
@@ -63,6 +70,23 @@ def render_markdown():
     html = markdown.markdown(text)
     return jsonify({'html': html})
 
+@app.route('/api/images')
+def list_images():
+    image_dir = os.path.join(app.static_folder, 'images')
+    try:
+        files = [f for f in os.listdir(image_dir) if not f.startswith('.')]
+    except FileNotFoundError:
+        files = []
+    return jsonify(files)
+
+@app.route('/articles/<name>')
+def article(name):
+    path = os.path.join('../content', f'{name}.md')
+    if not os.path.exists(path):
+        abort(404)
+    with open(path, 'r') as f:
+        html = markdown.markdown(f.read())
+    return f"<html><body>{html}</body></html>"
 
 @app.route('/api/login', methods=['POST'])
 def login():
