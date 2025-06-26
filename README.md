@@ -45,9 +45,9 @@ Dieses Repository dient als Testumgebung für:
 - [ ] API für „Fun Facts“ oder Zitate bauen
 
 ### 🐳 Docker & DevOps
-- [ ] Dockerfile für statischen Server (Nginx)
-- [ ] Dockerfile für API mit `docker-compose.yml`
-- [ ] `.devcontainer` für VS Code Remote Development
+- [x] Dockerfile für statischen Server (Nginx)
+- [x] Dockerfile für API mit `docker-compose.yml`
+- [x] `.devcontainer` für VS Code Remote Development
 - [ ] `Makefile` oder `Taskfile.yml` für lokale Automatisierung
 
 ### 🔐 Sicherheit & Access Control
@@ -67,6 +67,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 # oder: docker compose up --build
 ```
+
+### Docker Compose
+
+Statt der lokalen Installation kann die Anwendung über Docker Compose gestartet werden:
+
+```bash
+docker compose up --build
+```
+Frontend steht dann auf <http://localhost:8080>, die API auf <http://localhost:5000> bereit.
 
 ### API starten
 
