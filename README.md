@@ -17,10 +17,10 @@ Dieses Repository dient als Testumgebung für:
 ## 🔧 Projektmodule & Aufgaben
 
 ### 🌐 Statische Webinhalte
-- [ ] Landing Page mit HTML/CSS (Tailwind oder Bootstrap)
-- [ ] Dark-/Light-Mode Toggle via JavaScript
-- [ ] Dynamische Gallerie aus einem Verzeichnis (`/public/images`)
-- [ ] Markdown-Artikel als statische Seiten (`/content/*.md`)
+- [x] Landing Page mit HTML/CSS (Tailwind oder Bootstrap)
+- [x] Dark-/Light-Mode Toggle via JavaScript
+- [x] Dynamische Gallerie aus einem Verzeichnis (`/public/images`)
+- [x] Markdown-Artikel als statische Seiten (`/content/*.md`)
 - [ ] Kontaktformular (Frontend, optional Backend-Anbindung)
 - [ ] Lokale Sprachumschaltung (Deutsch/Englisch)
 
@@ -77,11 +77,15 @@ lokal mit folgendem Kommando gestartet werden:
 python api/app.py
 ```
 
+Die statische Seite erreichst du unter `http://localhost:5000/`.
 Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
 
 ### Neue Endpunkte
 
 - `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück
+- `GET /api/images` – listet Dateien aus `/public/images`
+- Der Ordner ist im Repository leer; füge eigene Bilder unter `public/images` hinzu.
+- `GET /articles/<name>` – rendert Markdown-Dateien aus `/content`
 
 ## 🖥️ Lokale Nutzung
 
