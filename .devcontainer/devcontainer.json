@@ -1,0 +1,10 @@
+{
+    "name": "Codex Playground",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "api",
+    "workspaceFolder": "/workspace/hostlab",
+    "extensions": [
+        "ms-python.python"
+    ],
+    "forwardPorts": [5000, 8080]
+}
