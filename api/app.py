@@ -4,6 +4,8 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.utils import secure_filename
 import markdown
+import secrets
+from functools import wraps
 from data import store
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,15 +23,38 @@ def allowed_file(filename: str) -> bool:
     """Check if the filename has an allowed extension."""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Dummy user store and token storage
+USERS = {"admin": "secret"}
+TOKENS = {}
+
+
+def login_required(f):
+    """Simple decorator to require a valid token."""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        auth = request.headers.get("Authorization", "")
+        token = None
+        if auth.startswith("Bearer "):
+            token = auth.split(" ", 1)[1]
+        if not token:
+            token = request.args.get("token")
+        if not token or token not in TOKENS.values():
+            return jsonify({"error": "unauthorized"}), 401
+        return f(*args, **kwargs)
+
+    return wrapper
+
 @app.route('/api/ping')
 def ping():
     return jsonify({'message': 'pong'})
 
 @app.route('/api/info')
+@login_required
 def info():
     return jsonify({'project': 'Codex Playground', 'status': 'development'})
 
 @app.route('/api/render', methods=['POST'])
+@login_required
 def render_markdown():
     data = request.get_json() or {}
     text = data.get('text')
@@ -39,6 +64,18 @@ def render_markdown():
     return jsonify({'html': html})
 
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    """Dummy login returning a simple token."""
+    data = request.get_json() or {}
+    user = data.get("username")
+    password = data.get("password")
+    if USERS.get(user) != password:
+        return jsonify({"error": "invalid credentials"}), 401
+    token = secrets.token_hex(16)
+    TOKENS[user] = token
+    return jsonify({"token": token})
+  
 # Simple JSON store endpoints
 @app.route('/api/store', methods=['GET'])
 def list_entries():

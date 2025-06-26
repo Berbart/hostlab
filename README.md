@@ -51,7 +51,7 @@ Dieses Repository dient als Testumgebung für:
 - [ ] `Makefile` oder `Taskfile.yml` für lokale Automatisierung
 
 ### 🔐 Sicherheit & Access Control
-- [ ] Zugriffsbeschränkung für API-Endpunkte
+- [x] Zugriffsbeschränkung für API-Endpunkte
 - [ ] Upload-Security: Dateitypprüfung, Limitierung
 - [ ] Custom Error Pages (z. B. 404, 403)
 
@@ -81,7 +81,8 @@ Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
 
 ### Neue Endpunkte
 
-- `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück
+- `POST /api/login` – gibt bei korrekter Anmeldung ein Token zurück (`{"username": "admin", "password": "secret"}`)
+- `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück (Token benötigt)
 
 ## 🖥️ Lokale Nutzung
 
