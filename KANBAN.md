@@ -2,12 +2,15 @@
 
 ## Backlog
 - Landing Page gestalten
-- REST-API Grundgerüst aufsetzen
 - DevContainer für VS Code konfigurieren
 - Docker Compose zum Starten aller Services erstellen
+- File Upload Endpoint implementieren
 
 ## In Progress
-- README erweitern und Dokumentation verbessern
+- API Tests erweitern
 
 ## Done
 - Repository initialisiert
+- REST-API Grundgerüst aufgesetzt
+- README erweitert und Dokumentation verbessert
+- Markdown-Renderer Endpoint umgesetzt
