@@ -66,3 +66,25 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 # oder: docker compose up --build
+```
+
+## 🖥️ Lokale Nutzung
+
+Dieser Playground soll dir die komplette Kontrolle über deine Webanwendung geben.
+Du kannst alle Features direkt auf deinem Laptop ausführen und über VS Code testen.
+Im DevContainer läuft sowohl ein Webserver für statische Dateien als auch
+(optional) eine API mit Hot-Reload. So entwickelst du ohne Umwege und siehst jede
+Änderung sofort im Browser.
+
+### Tipps für dein Setup
+- VS Code mit Remote-Containers Erweiterung öffnen
+- `docker compose up` startet Frontend und Backend
+- lokale URL im Browser aufrufen, z.B. `http://localhost:8000`
+- Anpassungen an HTML/CSS/JS werden automatisch geladen
+
+## 🗂️ Projektübersicht
+
+Mit diesem Repository kannst du Schritt für Schritt eine modulare Webanwendung
+aufbauen. Kombiniere statische Seiten, kleine Spiele und APIs nach Belieben und
+verwende Docker für eine einheitliche Entwicklungsumgebung. Schau auch in die
+Datei `KANBAN.md`, um den aktuellen Stand der geplanten Aufgaben zu sehen.
