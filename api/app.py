@@ -4,6 +4,7 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.utils import secure_filename
 import markdown
+from data import store
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_FOLDER = BASE_DIR / "uploads"
@@ -37,6 +38,46 @@ def render_markdown():
     html = markdown.markdown(text)
     return jsonify({'html': html})
 
+
+# Simple JSON store endpoints
+@app.route('/api/store', methods=['GET'])
+def list_entries():
+    return jsonify(store.read_all())
+
+
+@app.route('/api/store/<int:entry_id>', methods=['GET'])
+def get_single_entry(entry_id):
+    entry = store.get_entry(entry_id)
+    if entry is None:
+        return jsonify({'error': 'not found'}), 404
+    return jsonify(entry)
+
+
+@app.route('/api/store', methods=['POST'])
+def create_entry():
+    data = request.get_json() or {}
+    if not isinstance(data, dict):
+        return jsonify({'error': 'invalid data'}), 400
+    new_entry = store.add_entry(data)
+    return jsonify(new_entry), 201
+
+
+@app.route('/api/store/<int:entry_id>', methods=['PUT'])
+def update_single_entry(entry_id):
+    data = request.get_json() or {}
+    if not isinstance(data, dict):
+        return jsonify({'error': 'invalid data'}), 400
+    updated = store.update_entry(entry_id, data)
+    if updated is None:
+        return jsonify({'error': 'not found'}), 404
+    return jsonify(updated)
+
+
+@app.route('/api/store/<int:entry_id>', methods=['DELETE'])
+def delete_single_entry(entry_id):
+    if store.delete_entry(entry_id):
+        return jsonify({'status': 'deleted'})
+    return jsonify({'error': 'not found'}), 404
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
