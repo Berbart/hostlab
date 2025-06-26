@@ -25,11 +25,11 @@ Dieses Repository dient als Testumgebung für:
 - [ ] Lokale Sprachumschaltung (Deutsch/Englisch)
 
 ### ⚙️ Backend-Entwicklung
-- [ ] REST-API mit einfachen Endpunkten (`/api/ping`, `/api/info`)
+- [x] REST-API mit einfachen Endpunkten (`/api/ping`, `/api/info`)
 - [ ] File Upload + File Serving über die API
 - [ ] Einfacher JSON-Datenspeicher (Dateibasiert)
 - [ ] Dummy-Login mit Session (Cookie oder Token-basiert)
-- [ ] Serverseitiger Markdown-Renderer
+- [x] Serverseitiger Markdown-Renderer
 
 ### 🎲 Interaktive Spiele (Frontend/Backend kombiniert)
 - [ ] Einfaches Schachspiel mit KI oder Zwei-Spieler-Logik
@@ -78,6 +78,10 @@ python api/app.py
 ```
 
 Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
+
+### Neue Endpunkte
+
+- `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück
 
 ## 🖥️ Lokale Nutzung
 
