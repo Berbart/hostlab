@@ -68,6 +68,17 @@ pip install -r requirements.txt
 # oder: docker compose up --build
 ```
 
+### API starten
+
+Nach der Installation der Abhängigkeiten kann die kleine Beispiel‑API
+lokal mit folgendem Kommando gestartet werden:
+
+```bash
+python api/app.py
+```
+
+Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
+
 ## 🖥️ Lokale Nutzung
 
 Dieser Playground soll dir die komplette Kontrolle über deine Webanwendung geben.
