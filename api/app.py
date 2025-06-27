@@ -13,7 +13,7 @@ from pathlib import Path
 from werkzeug.utils import secure_filename
 import secrets
 from functools import wraps
-from data import store
+from data import store, contact
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_FOLDER = BASE_DIR / "uploads"
@@ -160,6 +160,19 @@ def create_entry():
         return jsonify({'error': 'invalid data'}), 400
     new_entry = store.add_entry(data)
     return jsonify(new_entry), 201
+
+
+@app.route('/api/contact', methods=['POST'])
+def create_contact():
+    """Receive contact form submissions."""
+    data = request.get_json() or {}
+    name = data.get('name')
+    email = data.get('email')
+    message = data.get('message')
+    if not name or not email or not message:
+        return jsonify({'error': 'invalid data'}), 400
+    contact.add_contact({'name': name, 'email': email, 'message': message})
+    return jsonify({'status': 'received'}), 201
 
 
 @app.route('/api/store/<int:entry_id>', methods=['PUT'])
