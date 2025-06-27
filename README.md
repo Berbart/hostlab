@@ -26,13 +26,13 @@ Dieses Repository dient als Testumgebung für:
 
 ### ⚙️ Backend-Entwicklung
 - [x] REST-API mit einfachen Endpunkten (`/api/ping`, `/api/info`)
-- [ ] File Upload + File Serving über die API
- - [x] Einfacher JSON-Datenspeicher (Dateibasiert)
-- [ ] Dummy-Login mit Session (Cookie oder Token-basiert)
+- [x] File Upload + File Serving über die API
+- [x] Einfacher JSON-Datenspeicher (Dateibasiert)
+- [x] Dummy-Login mit Session (Cookie oder Token-basiert)
 - [x] Serverseitiger Markdown-Renderer
 
 ### 🎲 Interaktive Spiele (Frontend/Backend kombiniert)
-- [ ] Einfaches Schachspiel mit KI oder Zwei-Spieler-Logik
+- [x] Einfaches Schachspiel mit KI oder Zwei-Spieler-Logik
 - [ ] Wizard (Stichspiel) als Spiel-Logik + Frontend
 - [ ] Zufallsgeneriertes Puzzle oder Memory-Spiel
 - [ ] Highscore-Logik & Spielstand-Speicherung
@@ -40,7 +40,7 @@ Dieses Repository dient als Testumgebung für:
 ### 🧠 KI-freundliche Aufgaben für Codex
 - [ ] Menü aus Ordnerstruktur generieren (`/content`)
 - [ ] Theme-Konfiguration per JSON-Datei
-- [ ] API-Tests schreiben (`pytest`, `unittest`, `go test`)
+- [x] API-Tests schreiben (`pytest`, `unittest`, `go test`)
 - [ ] Farben, Icons oder Layout dynamisch generieren lassen
 - [ ] API für „Fun Facts“ oder Zitate bauen
 
@@ -48,11 +48,11 @@ Dieses Repository dient als Testumgebung für:
 - [x] Dockerfile für statischen Server (Nginx)
 - [x] Dockerfile für API mit `docker-compose.yml`
 - [x] `.devcontainer` für VS Code Remote Development
-- [ ] `Makefile` oder `Taskfile.yml` für lokale Automatisierung
+- [x] `Makefile` oder `Taskfile.yml` für lokale Automatisierung
 
 ### 🔐 Sicherheit & Access Control
 - [x] Zugriffsbeschränkung für API-Endpunkte
-- [ ] Upload-Security: Dateitypprüfung, Limitierung
+- [x] Upload-Security: Dateitypprüfung, Limitierung
 - [ ] Custom Error Pages (z. B. 404, 403)
 
 ---
@@ -92,10 +92,15 @@ Die Endpunkte sind anschließend unter `http://localhost:5000/api/*` verfügbar.
 ### Neue Endpunkte
 
 - `GET /api/images` – listet Dateien aus `/public/images`
-- Der Ordner ist im Repository leer; füge eigene Bilder unter `public/images` hinzu.
 - `GET /articles/<name>` – rendert Markdown-Dateien aus `/content`
 - `POST /api/login` – gibt bei korrekter Anmeldung ein Token zurück (`{"username": "admin", "password": "secret"}`)
 - `POST /api/render` – erwartet JSON `{"text": "# Titel"}` und liefert gerendetes HTML zurück (Token benötigt)
+- `POST /api/upload` – lädt eine Datei hoch
+- `GET /api/files/<name>` – lädt hochgeladene Dateien herunter
+- `GET /api/store` / `POST /api/store` – listet bzw. erstellt Datensätze
+- `GET|PUT|DELETE /api/store/<id>` – Einzelzugriff auf Datensätze
+- `GET /api/chess` – aktuellen Spielstand abrufen
+- `POST /api/chess` – neuen Spielstand speichern
 
 ## 🖥️ Lokale Nutzung
 
