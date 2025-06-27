@@ -1,11 +1,13 @@
 # Kanban Board
 
 ## Backlog
-- Landing Page gestalten
-- File Upload Endpoint implementieren
+- Kontaktformular integrieren
+- Lokale Sprachumschaltung
+- Wizard Spiel erstellen
+- Highscore-Speicherung
 
 ## In Progress
-- API Tests erweitern
+- Upload-Security verbessern
 
 ## Done
 - Repository initialisiert
@@ -14,3 +16,10 @@
 - Markdown-Renderer Endpoint umgesetzt
 - DevContainer für VS Code konfiguriert
 - Docker Compose zum Starten aller Services erstellt
+- Landing Page gestaltet
+- File Upload Endpoint implementiert
+- Einfacher JSON-Datenspeicher eingebaut
+- Dummy-Login per Token
+- API Tests erweitert
+- Einfaches Schachspiel
+- Makefile hinzugefügt
