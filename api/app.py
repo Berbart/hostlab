@@ -34,6 +34,7 @@ DEFAULT_BOARD = [
     ["R","N","B","Q","K","B","N","R"]
 ]
 
+app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = str(UPLOAD_FOLDER)
 app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024  # 1MB
 
